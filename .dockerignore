@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+*.log
+logs/
+.env
+cricket_transform/target/
+cricket_transform/dbt_packages/
+cricket_transform/logs/

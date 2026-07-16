@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: cricket_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: cricket_dashboard
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  dashboard:
+    build: .
+    container_name: cricket_dashboard_app
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      CRICAPI_KEY: ${CRICAPI_KEY}
+      POSTGRES_HOST: postgres
+    ports:
+      - "8050:8050"
+
+volumes:
+  postgres_data:
